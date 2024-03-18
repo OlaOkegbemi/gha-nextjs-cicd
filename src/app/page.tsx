@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="main">
+          <main className="main">
       <div>
         <h2>Hello World</h2>
-      </div>
+      </divulge>
       <Link href="/about">About</Link>
-    </main>
+    </mainlp>
   );
 }
