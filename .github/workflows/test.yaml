@@ -9,7 +9,7 @@ jobs:
       - name: Setup Node.js environment #use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "20"
+          node-version: 20
           cache: "npm"
       - name: Install dependencies #install the dependencies
         run: npm ci
@@ -30,8 +30,8 @@ jobs:
       - uses: actions/upload-artifact@v2 #upload the test results
         if: always()
         with:
-          name: test-coverage
-          path: .coverage/
+          name: coverage
+          path: ./coverage/
       - name: Upload coverage to Codecov #upload the coverage to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
@@ -45,4 +45,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: playwright-test-results
-          path: playwright-results/
+          path: ./playwright-test-results/
