@@ -18,7 +18,7 @@ jobs:
       - name: Check for linting errors #check for linting errors
         run: npm run lint
       - name: Check for type errors #check for type errors
-        run: npm run type-check
+        run: npm run typecheck
       - name: Build #build the project
         run: npm run build
       - uses: actions/upload-artifact@v2 #upload the build artifact
