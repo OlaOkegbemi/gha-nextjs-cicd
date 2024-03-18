@@ -1,49 +1,48 @@
 name: Test
-on:
-    workflow_call
+on: workflow_call
 jobs:
-    test-and-build:
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Checkout #copy the repository to the runner
-                uses: actions/checkout@v2
-            -   name: Setup Node.js environment #use Node.js
-                uses: actions/setup-node@v2
-                with:
-                    node-version: '20'
-                    cache: 'npm'
-            -   name: Install dependencies #install the dependencies
-                run: npm ci
-            -   name: Check formatting #check the formatting
-                run: npm run format
-            -   name: Check for linting errors #check for linting errors
-                run: npm run lint
-            -   name: Check for type errors #check for type errors
-                run: npm run type-check
-            -   name: Build #build the project
-                run: npm run build
-            -   uses: actions/upload-artifact@v2 #upload the build artifact
-                with:
-                    name: build
-                    path: .next/
-            -   name: Run unit tests #run the unit tests
-                run: npm run test
-            -   uses: actions/upload-artifact@v2 #upload the test results
-                if: always()
-                with:
-                    name: test-coverage
-                    path: .coverage/
-            -   name: Upload coverage to Codecov #upload the coverage to Codecov
-                uses: codecov/codecov-action@v4.0.1
-                with:
-                    token: ${{ secrets.CODECOV_TOKEN }}
-                    slug: ${{ github.repository_owner }}/${{ github.repository }}
-            -   name: Install playwright browsers #install the browsers
-                run: npx playwright install --with-deps
-            -   name: Run e2e tests #run the e2e tests
-                run: npm run test:e2e
-            -   name: Upload e2e test results #upload the e2e test results
-                uses: actions/upload-artifact@v2
-                with:
-                    name: playwright-test-results
-                    path: playwright-results/ 
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout #copy the repository to the runner
+        uses: actions/checkout@v2
+      - name: Setup Node.js environment #use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+          cache: "npm"
+      - name: Install dependencies #install the dependencies
+        run: npm ci
+      - name: Check formatting #check the formatting
+        run: npm run format
+      - name: Check for linting errors #check for linting errors
+        run: npm run lint
+      - name: Check for type errors #check for type errors
+        run: npm run type-check
+      - name: Build #build the project
+        run: npm run build
+      - uses: actions/upload-artifact@v2 #upload the build artifact
+        with:
+          name: build
+          path: .next/
+      - name: Run unit tests #run the unit tests
+        run: npm run test
+      - uses: actions/upload-artifact@v2 #upload the test results
+        if: always()
+        with:
+          name: test-coverage
+          path: .coverage/
+      - name: Upload coverage to Codecov #upload the coverage to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: ${{ github.repository_owner }}/${{ github.repository }}
+      - name: Install playwright browsers #install the browsers
+        run: npx playwright install --with-deps
+      - name: Run e2e tests #run the e2e tests
+        run: npm run test:e2e
+      - name: Upload e2e test results #upload the e2e test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: playwright-test-results
+          path: playwright-results/
