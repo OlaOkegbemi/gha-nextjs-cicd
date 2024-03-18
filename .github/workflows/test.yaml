@@ -2,7 +2,7 @@ name: Test
 on:
     workflow_call
 jobs:
-    test:
+    test-and-build:
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout #copy the repository to the runner
