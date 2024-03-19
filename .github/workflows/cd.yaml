@@ -3,7 +3,7 @@ on:
     push:
         branches: [main]
     workflow_dispatch:
-        
+
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
@@ -24,7 +24,7 @@ jobs:
               id: changesets
               uses: changesets/action@v1
               with:
-                publish: npx changeset tag
+                publish: npx changeset tag # creates a release
               env:
                 GITHUB_TOKEN: ${{ secrets.CHANGESETS_TOKEN }}
             - run: echo '${{ toJSON(steps.changesets.outputs) }}'
