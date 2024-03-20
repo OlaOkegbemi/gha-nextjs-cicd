@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setuo Node Environment
+      - name: Setup Node Environment
         uses: actions/setup-node@v3
         with:
           node-version: 20
