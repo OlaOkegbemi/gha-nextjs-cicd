@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 #
+          persist-credentials: false
       - name: Setup Node Environment
         uses: actions/setup-node@v3
         with:
@@ -27,7 +30,7 @@ jobs:
         with:
           publish: npx changeset tag # creates a release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CHANGESETS_TOKEN }}
 
       - run: echo '${{ toJSON(steps.changesets.outputs) }}'
       - name: Set Release Version
