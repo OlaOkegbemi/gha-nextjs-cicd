@@ -28,7 +28,8 @@ jobs:
         with:
           publish: npx changeset tag # creates a release
         env:
-          GITHUB_TOKEN: ${{ secrets.CHANGESETS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - run: echo '${{ toJSON(steps.changesets.outputs) }}'
       - name: Set Release Version
         id: get-version
